@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lushuaiyu.mall.mapper.UmsPermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lushuaiyu.mall.entity.UmsPermission">
+        <id column="id" property="id"/>
+        <result column="pid" property="pid"/>
+        <result column="name" property="name"/>
+        <result column="value" property="value"/>
+        <result column="icon" property="icon"/>
+        <result column="type" property="type"/>
+        <result column="uri" property="uri"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="sort" property="sort"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <select id="findUserPermissions" resultMap="BaseResultMap">
+        SELECT m.value
+        FROM ums_role r
+        LEFT JOIN ums_admin_role_relation ur ON (r.id = ur.role_id)
+        LEFT JOIN ums_admin u ON (u.id = ur.admin_id)
+        LEFT JOIN ums_role_permission_relation rm ON (rm.role_id = r.id)
+        LEFT JOIN ums_permission m ON (m.id = rm.permission_id)
+        WHERE u.status = 1
+        <if test="null != userName">
+            and u.username = #{userName}
+        </if>
+        AND m.value is not null
+        AND m.value &lt;> ''
+
+    </select>
+
+</mapper>

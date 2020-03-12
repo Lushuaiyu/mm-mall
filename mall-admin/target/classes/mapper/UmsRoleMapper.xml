@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lushuaiyu.mall.mapper.UmsRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lushuaiyu.mall.entity.UmsRole">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="admin_count" property="adminCount"/>
+        <result column="create_time" property="createTime"/>
+        <result column="status" property="status"/>
+        <result column="sort" property="sort"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+    <select id="findUserRole" resultMap="BaseResultMap">
+        select r.*
+        from ums_role r
+        left join ums_admin_role_relation ur on (r.id = ur.role_id)
+        left join ums_admin u on (u.id = ur.admin_id)
+        where u.status = 1
+        <if test="null != userName">
+            and u.username = #{userName}
+        </if>
+
+
+    </select>
+
+</mapper>
