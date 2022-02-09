@@ -30,7 +30,7 @@
         <commons-lang3.version>3.4</commons-lang3.version>
         <spring-boot-starter-aop.version>2.2..5.RELEASE</spring-boot-starter-aop.version>
         <velocity.version>1.7</velocity.version>
-        <shiro-spring.version>1.4.0</shiro-spring.version>
+        <shiro-spring.version>1.7.1</shiro-spring.version>
         <java-jwt.version>3.2.0</java-jwt.version>
         <mysql.version>5.1.47</mysql.version>
         <commons-lang3.version>3.4</commons-lang3.version>
